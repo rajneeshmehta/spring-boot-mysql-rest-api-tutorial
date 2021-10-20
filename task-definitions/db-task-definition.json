@@ -1,0 +1,68 @@
+{
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "inferenceAccelerators": [],
+    "containerDefinitions": [
+        {
+            "name": "db",
+            "image": "mysql:5",
+            "memoryReservation": "128",
+            "resourceRequirements": null,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": "3306",
+                    "protocol": "tcp"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "supersecretpassword"
+                },
+                {
+                    "name": "MYSQL_DATABASE",
+                    "value": "notes_app"
+                },
+                {
+                    "name": "MYSQL_USER",
+                    "value": "app"
+                },
+                {
+                    "name": "MYSQL_PASSWORD",
+                    "value": "secretpassword"
+                }
+            ],
+            "environmentFiles": [],
+            "secrets": null,
+            "mountPoints": null,
+            "volumesFrom": null,
+            "hostname": null,
+            "user": null,
+            "workingDirectory": null,
+            "extraHosts": null,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/spring-boot-db",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "ulimits": null,
+            "dockerLabels": null,
+            "dependsOn": null,
+            "repositoryCredentials": {
+                "credentialsParameter": ""
+            }
+        }
+    ],
+    "volumes": [],
+    "networkMode": "awsvpc",
+    "memory": "512",
+    "cpu": "256",
+    "executionRoleArn": "arn:aws:iam::597927635090:role/ecsTaskExecutionRole",
+    "family": "spring-boot-db",
+    "tags": []
+}
